@@ -12,7 +12,16 @@ namespace UWPSoundBoard.Model
         public static void GetAllSounds(ObservableCollection<Sound> sounds)
         {
             var allSounds = getSounds();
+            sounds.Clear();
             allSounds.ForEach(sound => sounds.Add(sound)); //Lambda expression
+        }
+
+        public static void GetSoundsByCategory(ObservableCollection<Sound> sounds, SoundCategory category)
+        {
+            var allSounds = getSounds();
+            var filteredSounds = allSounds.Where(sound => sound.Category == category).ToList();
+            sounds.Clear();
+            filteredSounds.ForEach(sound => sounds.Add(sound)); //Lambda expression
         }
 
         private static List<Sound> getSounds()

@@ -19,24 +19,34 @@
             <Button Name="HamburgerButton"
                     RelativePanel.AlignLeftWithPanel="True"
                     FontFamily="Segoe MDL2 Assets"
-                    Content="&#xE700;" />
+                    Content="&#xE700;" Click="HamburgerButton_Click"/>
 
             <Button Name="BackButton"
                     RelativePanel.RightOf="HamburgerButton"
                     FontFamily="Segoe MDL2 Assets"
-                    Content="&#xE0A6;" />
+                    Content="&#xE0A6;" Click="BackButton_Click"/>
 
             <SplitView Grid.Row="1"
                        Name="MySplitView"
                        DisplayMode="CompactOverlay"
-                       CompactPaneLength="45"
-                       Margin="35,27,200,200"
-                       OpenPaneLength="400" >
+                       CompactPaneLength="34"
+                       Margin="0,27,0,0"
+                       OpenPaneLength="200" >
                 <SplitView.Pane>
-                    <ListView Name="MenuItemsListView" IsItemClickEnabled="True" />
+                    <ListView Name="MenuItemsListView" IsItemClickEnabled="True" 
+                              ItemsSource="{x:Bind MenuItems}" ItemClick="MenuItemsListView_ItemClick">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:MenuItem">
+                                <StackPanel Orientation="Horizontal">                                  
+                                    <Image Source="{x:Bind IconFile}" Height="30" Width="30" Margin="-10,0,0,0"/>
+                                    <TextBlock Text="{x:Bind Category}" FontSize="18" Margin="10,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </SplitView.Pane>
                 <SplitView.Content>
-                    <Grid Margin="40,40,0,0">
+                    <Grid Margin="20,20,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
@@ -47,6 +57,7 @@
                                   Name="SoundGridView"
                                   IsItemClickEnabled="True"
                                   ItemsSource="{x:Bind Sounds}"
+                                  ItemClick="SoundGridView_ItemClick"
                                   >
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="model:Sound">
